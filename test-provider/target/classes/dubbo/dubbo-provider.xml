@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+	http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+    <!-- 提供方应用信息，用于计算依赖关系 -->
+    <dubbo:application name="test-provider" />
+
+    <!-- 这里使用的注册中心是zookeeper -->
+    <dubbo:registry address="zookeeper://127.0.0.1:2181" client="curator"/>
+
+    <!-- 用dubbo协议在3019端口暴露服务 -->
+    <dubbo:protocol name="dubbo" port="20045" />
+
+    <dubbo:provider timeout="20000"/>
+
+    <!-- 将该接口暴露到dubbo中 -->
+    <dubbo:service interface="com.lee.testproviderapi.api.TestDubboApi" ref="testDubboApiImpl"/>
+
+</beans>
